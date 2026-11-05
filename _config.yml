@@ -21,7 +21,7 @@ baseurl                  : "" # the subpath of your site, e.g. "/blog"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "xianmei-ren-000.jpg"
+  avatar           : "xianmei-ren-000.png"
   name             : "任宪美"
   pronouns         :
   bio              : "Ph.D. Candidate in Statistics"
