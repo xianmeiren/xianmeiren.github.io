@@ -1,10 +1,18 @@
-name: Jekyll site CI
+name: Build and deploy Jekyll site
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main", "master" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -16,21 +24,25 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: Set up Ruby and install project dependencies
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '4.0'
+        bundler-cache: true
     - name: Configure GitHub Pages
-      if: github.event_name == 'push'
+      if: github.event_name != 'pull_request'
       uses: actions/configure-pages@v5
-    - name: Build the site in the jekyll/builder container
-      run: |
-        docker run \
-        -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
-        jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && bundle install && bundle exec jekyll build --future"
+    - name: Build the site
+      env:
+        JEKYLL_ENV: production
+      run: bundle exec jekyll build --future --trace
     - name: Upload the built site
       uses: actions/upload-pages-artifact@v3
       with:
         path: _site
 
   deploy:
-    if: github.event_name == 'push'
+    if: github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     permissions:
