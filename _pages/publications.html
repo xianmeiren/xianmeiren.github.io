@@ -1,0 +1,20 @@
+---
+layout: archive
+title: "Publications"
+permalink: /publications/
+author_profile: true
+---
+
+{% if site.author.googlescholar %}
+  <div class="wordwrap">You can also find my articles on <a href="{{site.author.googlescholar}}">my Google Scholar profile</a>.</div>
+{% endif %}
+
+{% include base_path %}
+
+<!-- New style rendering if publication categories are defined -->
+<h2>Journal Articles</h2>
+{% assign all_publications = site.publications | concat: site.data.unpublished_publications %}
+{% assign ordered_publications = all_publications | sort: "sort_order" %}
+{% for post in ordered_publications %}
+  {% include archive-single.html %}
+{% endfor %}

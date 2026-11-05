@@ -1,0 +1,13 @@
+---
+layout: archive
+title: "Conferences"
+permalink: /conferences/
+author_profile: true
+---
+
+<p>Presentations and opportunities to exchange ideas with the wider research community.</p>
+
+{% assign ordered_conferences = site.conferences | sort: "sort_order" %}
+{% for post in ordered_conferences %}
+  {% include archive-single-conference.html %}
+{% endfor %}

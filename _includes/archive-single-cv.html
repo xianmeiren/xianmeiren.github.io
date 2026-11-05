@@ -1,0 +1,12 @@
+{% if post.collection == 'experience' %}
+  <li class="archive__item">
+    <strong>{{ post.type }}</strong>, <i>{{ post.venue }}</i> ({{ post.start_year }}–{{ post.end_year | default: "Present" }})
+    {{ post.content }}
+  </li>
+{% elsif post.collection == 'publications' %}
+  <li class="archive__item">
+    {{ post.citation }}
+    <br><strong>{{ post.status }}</strong>{% if post.status_detail %} · {{ post.status_detail }}{% endif %}{% if post.publication_year %} · {{ post.publication_year }}{% endif %}
+    {% if post.link %}<a href="{{ post.link }}">Article</a>{% endif %}
+  </li>
+{% endif %}

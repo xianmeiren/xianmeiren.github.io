@@ -1,0 +1,15 @@
+---
+layout: archive
+title: "Work Experience"
+permalink: /experience/
+author_profile: true
+---
+
+<p>My experience includes nearly three years as a data engineer in manufacturing and teaching assistant work during my doctoral studies.</p>
+
+{% include base_path %}
+
+{% assign ordered_experience = site.experience | sort: "sort_order" | reverse %}
+{% for post in ordered_experience %}
+  {% include archive-single.html %}
+{% endfor %}

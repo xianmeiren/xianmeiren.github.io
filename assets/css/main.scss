@@ -1,0 +1,71 @@
+---
+---
+
+/*
+ * This file controls what is imported from /_sass
+ *
+ * Note that the files are processed in the order they are imported, so they are partly
+   sorted by the dependencies. Also, the first two lines of the file are required by Jekyll.
+ */
+
+@import
+    "vendor/breakpoint/breakpoint",
+
+    "themes",
+    "theme/{{ site.site_theme | default: 'default' | append: '_light' }}",
+    "theme/{{ site.site_theme | default: 'default' | append: '_dark' }}",
+
+    "include/mixins",
+    "vendor/susy/susy",
+
+    "layout/reset",
+    "layout/base",
+
+    "include/utilities",
+    "layout/tables",
+    "layout/buttons",
+    "layout/notices",
+    "layout/masthead",
+    "layout/navigation",
+    "syntax",
+
+    "layout/forms",
+
+    "layout/page",
+    "layout/archive",
+    "layout/sidebar"
+;
+
+/* Figures shared by research summaries, conference notes, and work experience. */
+.content-figure {
+  margin: 1.5em 0;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--global-border-color);
+    border-radius: 8px;
+  }
+
+  figcaption {
+    margin-top: 0.65em;
+    color: var(--global-text-color-light);
+    font-size: 0.8em;
+    line-height: 1.6;
+  }
+}
+
+.archive__preview {
+  display: block;
+  max-width: 520px;
+  margin: 0.8em 0;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--global-border-color);
+    border-radius: 8px;
+  }
+}
